@@ -7,6 +7,9 @@ import { Arguments } from 'yargs'
 
 type Options = {
   host?: string | undefined
+  config?: string | undefined
+  template?: string | undefined
+  outputDir?: string | undefined
 }
 
 const module = {
@@ -17,12 +20,30 @@ const module = {
       .options({
         host: {
           alias: 'H',
-          describe: '编译配置文件',
+          describe: '接口文件托管域名',
+          type: 'string'
+        },
+        config: {
+          alias: 'c',
+          describe: '配置文件地址',
+          type: 'string'
+        },
+        template: {
+          alias: 't',
+          describe: '模板文件地址',
+          type: 'string'
+        },
+        outputDir: {
+          alias: 'o',
+          describe: '输出目录',
           type: 'string'
         }
       }),
   handler: async (argv: Arguments<Options>) => {
     const url = argv.host ?? 'https://osstest.tf56.com'
+    const config = argv.config ?? 'openapi.generator.config.json'
+    const template = argv.template ?? 'src/templates/typescript-axios'
+    const outputDir = argv.outputDir ?? 'src'
 
     let spinner = ora(`正在从 ${ url } 处加载API文件\n`).start()
 
@@ -58,13 +79,13 @@ const module = {
             '-i',
             'swagger.json',
             '-c',
-            'openapi.generator.config.json',
+            config,
             '-g',
             'typescript-axios',
             '-t',
-            'src/templates/typescript-axios',
+            template,
             '-o',
-            'src',
+            outputDir,
             '--custom-generator',
             'openapi.generator.jar'
           ], {
@@ -72,7 +93,7 @@ const module = {
           })
 
           openapi.stdout.on('data', (data) => {
-            // console.error(data)
+            console.log(data)
           })
 
           openapi.stdout.on('error', err => {
