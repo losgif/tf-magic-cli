@@ -1,6 +1,6 @@
 name: Publish Package to npmjs
 on:
-  create:
+  push:
     tags:
       - 'v*'
 jobs:
