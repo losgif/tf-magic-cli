@@ -36,15 +36,16 @@ const module: CommandModule = {
     const domain = args.domain
 
     if (!domain) {
-      process.stdout.write(chalk.red('No email to check! Please provide email to check in package.json!\n'));
+      process.stdout.write(chalk.red('You need to pass domain as argyment to husky-check-email!\n'));
       process.exit(1);
     }
-// console.log(`checking if email is ${needEmail}`);
+
+    if (!userEmail) {
+      process.stdout.write(chalk.red('No email to check! Please provide email to check in `git config user.email`!\n'))
+      process.exit(1);
+    }
+
     if (!checkUserEmail(domain, userEmail)) {
-      if (!domain) {
-        process.stdout.write(chalk.red('You need to pass domain as argyment to husky-check-email!\n'))
-        process.exit(1);
-      }
       process.stdout.write(chalk.red(`You need to commit with ${ domain } email\n`))
       process.stdout.write(`Your email is set to "${ userEmail }"\n`);
       process.stdout.write('You can fix this with following command:\n');

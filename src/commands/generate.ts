@@ -64,9 +64,16 @@ const module = {
             '-t',
             'src/templates/typescript-axios',
             '-o',
-            'src'
-          ])
-          openapi.stdout.on('data', () => {})
+            'src',
+            '--custom-generator',
+            'openapi.generator.jar'
+          ], {
+            cwd: process.cwd()
+          })
+
+          openapi.stdout.on('data', (data) => {
+            // console.error(data)
+          })
 
           openapi.stdout.on('error', err => {
             console.error(err)
