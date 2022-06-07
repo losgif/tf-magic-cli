@@ -85,9 +85,7 @@ const module = {
             '-t',
             template,
             '-o',
-            outputDir,
-            '--custom-generator',
-            'openapi.generator.jar'
+            outputDir
           ], {
             cwd: process.cwd()
           })
