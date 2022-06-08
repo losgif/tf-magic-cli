@@ -91,7 +91,7 @@ const module = {
           })
 
           openapi.stdout.on('data', (data) => {
-            console.log(data)
+            console.log(data.toString())
           })
 
           openapi.stdout.on('error', err => {
