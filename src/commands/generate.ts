@@ -87,6 +87,7 @@ const module = {
             '-o',
             outputDir
           ], {
+            shell: true,
             cwd: process.cwd()
           })
 
