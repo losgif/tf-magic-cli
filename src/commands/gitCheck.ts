@@ -36,7 +36,7 @@ const module: CommandModule = {
     const domain = args.domain
 
     if (!domain) {
-      process.stdout.write(chalk.red('You need to pass domain as argyment to husky-check-email!\n'));
+      process.stdout.write(chalk.red('You need to pass domain as argument to husky-check-email!\n'));
       process.exit(1);
     }
 
